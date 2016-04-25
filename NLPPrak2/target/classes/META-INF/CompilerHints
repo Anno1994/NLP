@@ -1,0 +1,13 @@
+dontinline,*.*_all_jmhStub
+dontinline,*.*_avgt_jmhStub
+dontinline,*.*_sample_jmhStub
+dontinline,*.*_ss_jmhStub
+dontinline,*.*_thrpt_jmhStub
+inline,jmh/BankBenchmarks.check
+inline,jmh/BankBenchmarks.deposit
+inline,jmh/BankBenchmarks.deposit_only1
+inline,jmh/BankBenchmarks.deposit_only2
+inline,jmh/BankBenchmarks.withdraw
+inline,jmh/BankBenchmarks.withdraw_only1
+inline,jmh/BankBenchmarks.withdraw_only2
+inline,org/openjdk/jmh/infra/Blackhole.clearSinks
