@@ -42,7 +42,7 @@ class Bank(object):
 
 
 class NumberGenerator(object):
-    """generates numbers for new accounts"""
+    """generates numbers for new accounts by adding 1 to num in each functin call (generateNumber)"""
     num = 0
 
     def __init__(self):
@@ -51,7 +51,7 @@ class NumberGenerator(object):
 
 
     def generateNumber(self):
-        """add 1 to the numbers and return them"""
+        """add 1 to the number and returns it"""
         self.num += 1
         return self.num
 
@@ -104,9 +104,9 @@ class Entry(object):
         self.EntryType = entryType
 
 
-    def print(self):
-        """just printing for testing entries..."""
-        print(self.amount, self.text, self.EntryType)
+#    def print(self):
+#        """just printing for testing entries..."""
+#        print(self.amount, self.text, self.EntryType)
 
 
 
@@ -154,7 +154,7 @@ def main():
     print(bank.getAccountBalance(bank, 0))
     print(bank.getAccountBalance(bank, 1))
 
-    #testAccount = bank.getAccount(bank, 0)                         #Entires Work
+    #testAccount = bank.getAccount(bank, 0)                         #Entries & printing them works
     #testAccount.printEntries()
 
 if __name__ == "__main__":
