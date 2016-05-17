@@ -117,7 +117,7 @@ public class HistogramForkJoin {
         private final int xStart;
         private final int yStart;
         private final int[] dest;
-        private final int threshold = 5; //bis zu 4 zeilen pro task
+        private final int threshold = 5; //bis zu 5 zeilen pro task
 
         public HistogramForkJoinTask_SharedMemory(BufferedImage image, int mask, int xStart, int yStart,
                                                   int rowsToCheck, int[] dest) {
