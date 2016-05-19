@@ -25,7 +25,7 @@ public class SampleSort_V2 {
 
         protected List<Integer> computePivots() {
             if (pivotCount > list.size()){
-                System.out.println("Too much pivots. we will use 2 pivot elements to sort the list");
+//                System.out.println("Too much pivots. we will use 2 pivot elements to sort the list");
                 pivotCount = 2;
             }
             List<Integer> pivots = new ArrayList<Integer>();
@@ -34,7 +34,7 @@ public class SampleSort_V2 {
                 boolean contains = true;
                 while (contains) {
                     int pivot = random.nextInt(list.size());
-                    if (pivots.contains(pivot)){  }
+                    if (pivots.contains(list.get(pivot))){ }
                     else {
                         pivots.add(list.get(pivot));
                         contains = false;
@@ -84,7 +84,7 @@ public class SampleSort_V2 {
                 List<RecursiveTask<List<Integer>>> tasks = new ArrayList<>();
 
                 for (int i = 0; i<partitionLists.size(); i++) {
-//                    if (!partitionLists.get(i).isEmpty())
+                    if(!partitionLists.get(i).isEmpty())
                         tasks.add(new SampleTask(partitionLists.get(i), pivotCount));
                 }
 
@@ -104,18 +104,38 @@ public class SampleSort_V2 {
     public static void main(String[] args) {
         Random rn = new Random();
         List<Integer> list = new ArrayList<Integer>();
-        for (int i = 0; i < 100; i++) {
-            list.add(rn.nextInt(100));
+        for (int i = 0; i < 10000; i++) {
+            int num = rn.nextInt(1000000000);
+            if (!list.contains(num)) {
+                list.add(num);
+            }
         }
-        SampleSort_V2 sorter = new SampleSort_V2();
+        SampleSort_V2 sorter_v2 = new SampleSort_V2();
 
-        float starT = System.currentTimeMillis();
-        List<Integer> result = sorter.sampleSort(list, 1);
-        float endT = System.currentTimeMillis();
+        long starT = System.currentTimeMillis();
+        List<Integer> result = sorter_v2.sampleSort(list, 4);
+        long endT = System.currentTimeMillis();
         System.out.println(endT-starT);
-        System.out.println(result);
+//        System.out.println(result);
+
+        int[] array = new int[list.size()];
+        for (int i = 0; i<list.size(); i++) {
+            array[i] = list.get(i);
+        }
+        starT = System.currentTimeMillis();
+        Arrays.parallelSort(array);
+        endT = System.currentTimeMillis();
+        System.out.println(endT-starT);
+//        System.out.println(Arrays.toString(array));
 
 
+        for (int i = 0; i<list.size(); i++) {
+            array[i] = list.get(i);
+        }
+        starT = System.currentTimeMillis();
+        Arrays.sort(array);
+        endT = System.currentTimeMillis();
+        System.out.println(endT-starT);
     }
 
 }

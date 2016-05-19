@@ -81,7 +81,7 @@ public class SampleSort {
         int[] test = {5, 1, 4, 10, 2, 8, 6};
         List<Integer> list = IntStream.of(test).boxed().collect(Collectors.toList());
         SampleSort sorter = new SampleSort();
-        System.out.println(sorter.sampleSort(list));
+
 
     }
 }
