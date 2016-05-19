@@ -35,7 +35,6 @@ public class SampleSort {
                     list.set(1, tmp);
                     return list;
                 }
-
             } else {
                 int pivot1 = list.get(0);
                 int pivot2 = list.get(list.size() - 1);
@@ -45,15 +44,14 @@ public class SampleSort {
                     pivot1 = pivot2;
                     pivot2 = tmp;
                 }
-
                 List<Integer> left = new ArrayList<Integer>();
                 List<Integer> middle = new ArrayList<Integer>();
                 List<Integer> right = new ArrayList<Integer>();
 
                 for (int i = 0; i < list.size(); i++) {
-                    if (list.get(i) < pivot1)
+                    if (list.get(i) <= pivot1)
                         left.add(list.get(i));
-                    else if (list.get(i) > pivot2)
+                    else if (list.get(i) >= pivot2)
                         right.add(list.get(i));
                     else
                         middle.add(list.get(i));
@@ -81,8 +79,7 @@ public class SampleSort {
         int[] test = {5, 1, 4, 10, 2, 8, 6};
         List<Integer> list = IntStream.of(test).boxed().collect(Collectors.toList());
         SampleSort sorter = new SampleSort();
-
-
+        System.out.println(sorter.sampleSort(list));
     }
 }
 
