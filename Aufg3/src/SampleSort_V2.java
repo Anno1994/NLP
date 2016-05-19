@@ -1,3 +1,4 @@
+import java.sql.Time;
 import java.util.*;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
@@ -24,8 +25,8 @@ public class SampleSort_V2 {
 
         protected List<Integer> computePivots() {
             if (pivotCount > list.size()){
-                System.out.println("Too much pivots. we will use 3 pivot elements to sort the list");
-                pivotCount = 3;
+                System.out.println("Too much pivots. we will use 2 pivot elements to sort the list");
+                pivotCount = 2;
             }
             List<Integer> pivots = new ArrayList<Integer>();
             for (int i=0; i<pivotCount; i++){
@@ -35,7 +36,7 @@ public class SampleSort_V2 {
                     int pivot = random.nextInt(list.size());
                     if (pivots.contains(pivot)){  }
                     else {
-                        pivots.add(pivot);
+                        pivots.add(list.get(pivot));
                         contains = false;
                     }
                 }
@@ -83,7 +84,8 @@ public class SampleSort_V2 {
                 List<RecursiveTask<List<Integer>>> tasks = new ArrayList<>();
 
                 for (int i = 0; i<partitionLists.size(); i++) {
-                    tasks.add(new SampleTask(partitionLists.get(i), pivotCount));
+//                    if (!partitionLists.get(i).isEmpty())
+                        tasks.add(new SampleTask(partitionLists.get(i), pivotCount));
                 }
 
                 for (int i = 0; i < tasks.size(); i++) {
@@ -100,10 +102,19 @@ public class SampleSort_V2 {
     }
 
     public static void main(String[] args) {
-        int[] test = {5, 1, 4, 10, 2, 8, 6};
-        List<Integer> list = IntStream.of(test).boxed().collect(Collectors.toList());
+        Random rn = new Random();
+        List<Integer> list = new ArrayList<Integer>();
+        for (int i = 0; i < 100; i++) {
+            list.add(rn.nextInt(100));
+        }
         SampleSort_V2 sorter = new SampleSort_V2();
-        System.out.println(sorter.sampleSort(list, 2));
+
+        float starT = System.currentTimeMillis();
+        List<Integer> result = sorter.sampleSort(list, 1);
+        float endT = System.currentTimeMillis();
+        System.out.println(endT-starT);
+        System.out.println(result);
+
 
     }
 
