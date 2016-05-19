@@ -30,16 +30,17 @@ public class SampleSort_V2 {
             }
             List<Integer> pivots = new ArrayList<Integer>();
             for (int i=0; i<pivotCount; i++){
-                Random random = new Random();
-                boolean contains = true;
-                while (contains) {
-                    int pivot = random.nextInt(list.size());
-                    if (pivots.contains(list.get(pivot))){ }
-                    else {
-                        pivots.add(list.get(pivot));
-                        contains = false;
-                    }
-                }
+//                Random random = new Random();
+//                boolean contains = true;
+//                while (contains) {
+//                    int pivot = random.nextInt(list.size());
+//                    if (pivots.contains(list.get(pivot))){ }
+//                    else {
+//                        pivots.add(list.get(pivot));
+//                        contains = false;
+//                    }
+//                }
+                pivots.add(list.get(i));
             }
             Collections.sort(pivots);
             return pivots;
