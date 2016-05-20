@@ -112,12 +112,20 @@ public class SampleSort_V2 {
             }
         }
         SampleSort_V2 sorter_v2 = new SampleSort_V2();
+        SampleSort sorter = new SampleSort();
 
         long starT = System.currentTimeMillis();
         List<Integer> result = sorter_v2.sampleSort(list, 4);
         long endT = System.currentTimeMillis();
-        System.out.println(endT-starT);
+        System.out.println("samplesortv2: "+(endT-starT)+"ms");
 //        System.out.println(result);
+
+        starT = System.currentTimeMillis();
+        List<Integer> res = sorter.sampleSort(list);
+
+        endT = System.currentTimeMillis();
+        System.out.println("samplesortv1: "+(endT-starT)+"ms");
+
 
         int[] array = new int[list.size()];
         for (int i = 0; i<list.size(); i++) {
@@ -126,7 +134,7 @@ public class SampleSort_V2 {
         starT = System.currentTimeMillis();
         Arrays.parallelSort(array);
         endT = System.currentTimeMillis();
-        System.out.println(endT-starT);
+        System.out.println("Arrays.parallesort: "+(endT-starT)+"ms");
 //        System.out.println(Arrays.toString(array));
 
 
@@ -136,7 +144,7 @@ public class SampleSort_V2 {
         starT = System.currentTimeMillis();
         Arrays.sort(array);
         endT = System.currentTimeMillis();
-        System.out.println(endT-starT);
+        System.out.println("Arrays.sort: "+(endT-starT)+"ms");
     }
 
 }
