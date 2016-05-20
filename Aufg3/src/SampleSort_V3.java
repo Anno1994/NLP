@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
@@ -11,6 +10,14 @@ import java.util.stream.IntStream;
  * Created by max on 19.05.16.
  */
 public class SampleSort_V3 {
+
+    public static void main(String[] args) {
+        SampleSort_V3 sort_v3 = new SampleSort_V3();
+        int[] test = {5, 1, 4, 10, 2, 8, 6};
+        List<Integer> list = IntStream.of(test).boxed().collect(Collectors.toList());
+
+        sort_v3.sampleSort(test, 2);
+    }
 
     public int[] sampleSort(int[] array, int pivotCount) {
         ForkJoinPool forkJoinPool = new ForkJoinPool();
@@ -30,21 +37,10 @@ public class SampleSort_V3 {
 
         private int[] computePivots() {
             if (pivotCount > array.length) {
-//                System.out.println("Too much pivots. we will use 2 pivot elements to sort the list");
                 pivotCount = 2;
             }
             int[] pivots = new int[pivotCount];
             for (int i = 0; i < pivotCount; i++) {
-//                Random random = new Random();
-//                boolean contains = true;
-//                while (contains) {
-//                    int pivot = random.nextInt(list.size());
-//                    if (pivots.contains(list.get(pivot))){ }
-//                    else {
-//                        pivots.add(list.get(pivot));
-//                        contains = false;
-//                    }
-//                }
                 pivots[i] = array[i];
             }
             Arrays.parallelSort(pivots);
@@ -150,13 +146,5 @@ public class SampleSort_V3 {
                 return result;
             }
         }
-    }
-
-    public static void main(String[] args) {
-        SampleSort_V3 sort_v3 = new SampleSort_V3();
-        int[] test = {5, 1, 4, 10, 2, 8, 6};
-        List<Integer> list = IntStream.of(test).boxed().collect(Collectors.toList());
-
-        sort_v3.sampleSort(test, 2);
     }
 }
