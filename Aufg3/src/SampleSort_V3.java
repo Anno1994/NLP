@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
@@ -14,9 +13,8 @@ public class SampleSort_V3 {
     public static void main(String[] args) {
         SampleSort_V3 sort_v3 = new SampleSort_V3();
         int[] test = {5, 1, 4, 10, 2, 8, 6};
-        List<Integer> list = IntStream.of(test).boxed().collect(Collectors.toList());
-
         sort_v3.sampleSort(test, 2);
+        System.out.println(Arrays.toString(test));
     }
 
     public int[] sampleSort(int[] array, int pivotCount) {
@@ -90,59 +88,46 @@ public class SampleSort_V3 {
 
                 int lastArrayPointer = 0;
                 for (int i = 0; i < pivots.length; i++) {
+                    int arrayPointer = 0;
                     for (int j = 0; j < array.length; j++) {
-                        int arrayPointer = 0;
-                        if (i == 0) {
-                            if (array[j] <= pivots[i]) {
-                                partitionsArray[j][arrayPointer] = array[i];
-                                arrayPointer++;
-                                continue;
-                            } else if (array[j] > pivots[pivots.length - 1]) {
-                                partitionsArray[j][lastArrayPointer] = array[i];
-                                continue;
-                            }
-                        } else {
+                        if (i > 0) {
                             if (array[j] <= pivots[i] && array[j] > pivots[i - 1]) {
-                                partitionsArray[j][arrayPointer] = array[i];
-                                continue;
+                                partitionsArray[i][arrayPointer] = array[j];
+                                arrayPointer++;
+                            }
+                        } else if (i == 0) {
+                            if (array[j] <= pivots[i]) {
+                                partitionsArray[i][arrayPointer] = array[j];
+                                arrayPointer++;
                             } else if (array[j] > pivots[pivots.length - 1]) {
-                                partitionsArray[j][lastArrayPointer] = array[i];
-                                continue;
+                                partitionsArray[partitionsArray.length - 1][lastArrayPointer] = array[j];
+                                lastArrayPointer++;
                             }
                         }
+
                     }
                 }
-//                for (int i = 0; i < array.length; i++) {
-//                    for (int j = 0; j < pivots.length; j++) {
-//                        if (array[i] <= pivots[j]) {
-//                            partitionsArray[j][arrayPointer] = array[i];
-//                            arrayPointer++;
-//                            break;
-//                        } else if (array[i] > pivots[pivots.length - 1]) {
-//                            partitionsArray[partitionsArray.length - 1][lastArrayPointer] = array[i];
-//                            lastArrayPointer++;
-//                            break;
-//                        }
-//                    }
-//                }
-                System.out.println("nlp");
 
+                RecursiveTask<int[]>[] tasks = new RecursiveTask[partitionsArray.length];
 
-                List<RecursiveTask<List<Integer>>> tasks = new ArrayList<>();
+                for (int i = 0; i < partitionsArray.length; i++) {
+                    tasks[i] = new SampleTask(partitionsArray[i], pivotCount);
+                }
 
-//                for (int i = 0; i<partitionLists.size(); i++) {
-//                    if(!partitionLists.get(i).isEmpty())
-//                        tasks.add(new SampleSort_V2.SampleTask(partitionLists.get(i), pivotCount));
-//                }
-
-                for (int i = 0; i < tasks.size(); i++) {
-                    tasks.get(i).fork();
+                for (int i = 0; i < tasks.length; i++) {
+                    tasks[i].fork();
                 }
 
                 int[] result = new int[array.length];
-//                for (int i = 0; i < tasks.size(); i++) {
-//                    result.addAll(tasks.get(i).join());
-//                }
+                for (int i = 0; i < tasks.length; i++) {
+                    int arrayPointer = 0;
+                    int[] tmp = tasks[i].join();
+                    System.out.println(Arrays.toString(tmp));
+                    for (int j = 0; j < tmp.length; j++) {
+                        result[arrayPointer] = tmp[j];
+                        arrayPointer++;
+                    }
+                }
                 return result;
             }
         }
