@@ -3,7 +3,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.function.IntConsumer;
 
 public class Histogram {
