@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Iterator;
+import java.util.function.IntConsumer;
 
 public class Histogram {
 
@@ -95,7 +95,7 @@ public class Histogram {
         BufferedImage img = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
         img.setData(image.getRaster());
         int[] result = new int[256];
-        Iterator<Integer> iterator = Arrays.stream(((DataBufferInt) img.getRaster().getDataBuffer()).getData())
+        Arrays.stream(((DataBufferInt) img.getRaster().getDataBuffer()).getData())
                 .parallel()
                 .map(pixel -> {
                     pixel = pixel & mask;
@@ -106,8 +106,8 @@ public class Histogram {
                     else
                         return pixel;
                 })
-                .iterator();
-        iterator.forEachRemaining(i -> result[i]++);
+                .iterator()
+                .forEachRemaining((IntConsumer) i -> result[i]++);
         return result;
     }
 
