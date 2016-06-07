@@ -15,10 +15,11 @@ public class Coder {
 
     /*
     * Contructor which creates the necessary components.
-    * Each letter is mapped to the given number in the Mnemoics HashMap
-    * and saved in a new HashMap called CharCode
+    * Each letter is mapped to the given number in the Mnemoics Map
+    * and saved in a new Map called CharCode
      */
     public Coder(List<String> list) {
+
         words = list;
         mnemonics.put(2, "ABC");
         mnemonics.put(3, "DEF");
@@ -30,7 +31,6 @@ public class Coder {
         mnemonics.put(9, "WXYZ");
 
         for (int i = 2; i <= 9; i++) {
-
             String[] tmp = mnemonics.get(i).split("");
             for (int j = 0; j < tmp.length; j++) {
                 charCode.put(tmp[j], i);
@@ -45,11 +45,11 @@ public class Coder {
 
     /*
     * This function maps all given strings from the word List
-    * into a HashMap<Integer, ArrayList<String>> by using the
+    * into a Map<Integer, List<String>> by using the
     * createNumFromWord function.
-    * The KeyValue is the number that represents the String
+    * The key is the number that represents the String
      */
-    public void mapWordsToNums() {                      //Mit Streams machbar ??
+    public void mapWordsToNums() {
 
         for (String word : words) {
             int keyValue = createNumFromWord(word);
@@ -66,22 +66,35 @@ public class Coder {
 
 
     /*
-    *function that returns the number to a given string
-    *by maping each letter to the specified number in the charCode Hashmap
+    *function that returns the number that represents the given string
+    *by maping each letter to the specified number in the CharCode Map
      */
     public int createNumFromWord(String string) {
 
         string = string.toUpperCase();
-        String[] splitted = string.split("");
+        String[] stringSplit = string.split("");
         String value = "";
-        for (String s : splitted) {
+        for (String s : stringSplit) {
             value += charCode.get(s);
         }
         return Integer.parseInt(value);
 
     }
 
-    public Map<Integer, ArrayList<String>> getMap() { return wordCode; }
+
+    /*
+    * return all ways to encode a number as a list of words
+    * in the words that are given from the List<String> Words
+     */
+    public List<String> encode(String number) {
+
+        List<String> list = new ArrayList<>();
+        if (wordCode.containsKey(Integer.parseInt(number))) {
+            list = wordCode.get(Integer.parseInt(number));
+        }
+        return list;
+
+    }
 
 
     public static void main(String[] args) {
@@ -90,8 +103,6 @@ public class Coder {
         test.add("Lava");
         test.add("Max");
         Coder coder = new Coder(test);
-        Map<Integer, ArrayList<String>> map = coder.getMap();
-        System.out.println(map.toString());
-
+        System.out.println(coder.encode("5282"));
     }
 }
