@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e30a2100-4d2b-47f3-83dd-f9bba265ab1f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Streams.java" afterPath="$PROJECT_DIR$/src/Streams.java" />
     </list>
     <ignored path="Aufg4.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -464,7 +463,14 @@
       <option name="project" value="LOCAL" />
       <updated>1465234091540</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="changed comment">
+      <created>1465288321284</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1465288321284</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -511,7 +517,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added parallel implementations for #2" />
     <MESSAGE value="changed interator-version" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed interator-version" />
+    <MESSAGE value="changed comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed comment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
