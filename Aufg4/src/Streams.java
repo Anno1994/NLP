@@ -22,6 +22,10 @@ public class Streams {
     /*
     Returns a Map containing all characters found inside the string-list,
     as keys and their occurrence-quantity as values.
+    Chars only exist in Map, if char exists in String-List.
+    Meaning, that you can't just get the occurrence-count for every Character
+    but only the ones present in the String-List. If character occurs zero
+    times, you have to check fist if it is present.
     */
     public static Map<Character, Long> getCharOccurrenceMap(List<String> strings) {
         return strings.stream()                                         //turn list of strings to stream
