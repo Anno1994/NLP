@@ -14,9 +14,9 @@ public class Coder {
 
 
     /*
-    * Contructor which creates the necessary components.
-    * Each letter is mapped to the given number in the Mnemoics Map
-    * and saved in a new Map called CharCode
+    Contructor which creates the necessary components.
+    Each letter is mapped to the given number in the Mnemoics Map
+    and saved in a new Map called CharCode
      */
     public Coder(List<String> list) {
 
@@ -44,10 +44,10 @@ public class Coder {
 
 
     /*
-    * This function maps all given strings from the word List
-    * into a Map<Integer, List<String>> by using the
-    * createNumFromWord function.
-    * The key is the number that represents the String
+    This function maps all given strings from the word List
+    into a Map<Integer, List<String>> by using the
+    createNumFromWord function.
+    The key is the number that represents the String
      */
     public void mapWordsToNums() {
 
@@ -66,8 +66,8 @@ public class Coder {
 
 
     /*
-    *function that returns the number that represents the given string
-    *by maping each letter to the specified number in the CharCode Map
+    function that returns the number that represents the given string
+    by maping each letter to the specified number in the CharCode Map
      */
     public int createNumFromWord(String string) {
 
@@ -83,8 +83,8 @@ public class Coder {
 
 
     /*
-    * return all ways to encode a number as a list of words
-    * in the words that are given from the List<String> Words
+    return all ways to encode a number as a list of words
+    in the words that are given from the List<String> Words
      */
     public List<String> encode(String number) {
 
