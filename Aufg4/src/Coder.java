@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by max on 06.06.16.
@@ -30,16 +29,13 @@ public class Coder {
         mnemonics.put(8, "TUV");
         mnemonics.put(9, "WXYZ");
 
-        for (int i = 2; i <= 9; i++) {
-            String[] tmp = mnemonics.get(i).split("");
-            for (int j = 0; j < tmp.length; j++) {
-                charCode.put(tmp[j], i);
-            }
-
-        }
+        mnemonics.entrySet()
+                .stream()
+                .flatMap(entry -> Arrays.stream(entry.getValue().split(""))
+                        .map(letter -> new HashMap.SimpleEntry<>(letter, entry.getKey())))
+                .forEach(entry -> charCode.put(entry.getKey(), entry.getValue()));
 
         mapWordsToNums();
-
     }
 
 
@@ -71,14 +67,9 @@ public class Coder {
      */
     public int createNumFromWord(String string) {
 
-        string = string.toUpperCase();
-        String[] stringSplit = string.split("");
-        String value = "";
-        for (String s : stringSplit) {
-            value += charCode.get(s);
-        }
-        return Integer.parseInt(value);
-
+           return Integer.parseInt(Arrays.stream(string.toUpperCase().split(""))
+                   .map(s -> charCode.get(s).toString())
+                   .reduce(String::concat).get());
     }
 
 
@@ -104,5 +95,6 @@ public class Coder {
         test.add("Max");
         Coder coder = new Coder(test);
         System.out.println(coder.encode("5282"));
+        System.out.println(coder.createNumFromWord("java"));
     }
 }
