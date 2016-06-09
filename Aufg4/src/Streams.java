@@ -19,6 +19,7 @@ public class Streams {
                 .collect(Collectors.toList());                          //collect words
     }
 
+
     /*
     Returns a Map containing all characters found inside the string-list,
     as keys and their occurrence-quantity as values.
@@ -37,6 +38,16 @@ public class Streams {
                 .collect(Collectors.groupingBy(                         //create map:
                         Function.identity(),                            //every char becomes a key
                         Collectors.counting()));                        //its occurrence becomes its value
+    }
+
+    //VERBESSERTE VERSION
+    public static Map<Character, Long> getCharOccurenceMap2(List<String> strings){
+        return strings.stream()
+                .map(string -> string.chars())
+                .flatMap(intStream -> intStream.mapToObj(i -> (char)i))
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        Collectors.counting()));
     }
 
     /*
