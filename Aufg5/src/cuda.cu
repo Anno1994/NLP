@@ -43,11 +43,12 @@ int main(void) {
 		a3_h[i] = (float)i*0.5;
 	}
 	
-	cudaEvent_t start, stop;
-	HANDLE_ERROR( cudaEventCreate( &start ) ); 
-	HANDLE_ERROR( cudaEventCreate( &stop ) ); 
-	HANDLE_ERROR( cudaEventRecord( start, 0 ) );
-
+//	cudaEvent_t start, stop;
+//	HANDLE_ERROR( cudaEventCreate( &start ) ); 
+//	HANDLE_ERROR( cudaEventCreate( &stop ) ); 
+//	HANDLE_ERROR( cudaEventRecord( start, 0 ) );
+	
+	float start = time.time();
 	cudaMalloc((void **) &a1_d, size);
 	cudaMalloc((void **) &a2_d, size);
 	cudaMalloc((void **) &a3_d, size);
@@ -65,13 +66,14 @@ int main(void) {
 	cudaFree(a1_d);
 	cudaFree(a2_d);
 	cudaFree(a2_d);
+	print(time.time() - start);
 
-	HANDLE_ERROR( cudaEventRecord( stop, 0 ) );
-	HANDLE_ERROR( cudaEventSynchronize( stop ) );
-	float   elapsedTime;
-	HANDLE_ERROR( cudaEventElapsedTime( &elapsedTime, start, stop ) );
-	printf( "Time for ...:  %3.1f ms\n", elapsedTime );
+//	HANDLE_ERROR( cudaEventRecord( stop, 0 ) );
+//	HANDLE_ERROR( cudaEventSynchronize( stop ) );
+//	float   elapsedTime;
+//	HANDLE_ERROR( cudaEventElapsedTime( &elapsedTime, start, stop ) );
+//	printf( "Time for ...:  %3.1f ms\n", elapsedTime );
 	
-	HANDLE_ERROR( cudaEventDestroy( start ) );
-	HANDLE_ERROR( cudaEventDestroy( stop ) );
+//	HANDLE_ERROR( cudaEventDestroy( start ) );
+//	HANDLE_ERROR( cudaEventDestroy( stop ) );
 }
