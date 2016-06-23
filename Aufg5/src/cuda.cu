@@ -3,7 +3,7 @@
 #include <cuda.h>
 
 __global__ void dotproduct( float *a, float *b, float *c ) {
-
+	int threadsPerBlock = 100;
     __shared__ float cache[threadsPerBlock];
     int tid = threadIdx.x + blockIdx.x * blockDim.x;
     int cacheIndex = threadIdx.x;
@@ -38,14 +38,14 @@ int main(void) {
 	a3_h = (float *)malloc(size);
 	for (int i=0; i<N; i++) {
 		a1_h[i] = (float)i;
-		a2_h[i] = (float)i+5
-		a3_h[i] = (float)i*0.5
+		a2_h[i] = (float)i+5;
+		a3_h[i] = (float)i*0.5;
 	}
 	
-	cudaEvent_t start, stop;
-	HANDLE_ERROR( cudaEventCreate( &start ) ); 
-	HANDLE_ERROR( cudaEventCreate( &stop ) ); 
-	HANDLE_ERROR( cudaEventRecord( start, 0 ) );
+//	cudaEvent_t start, stop;
+//	HANDLE_ERROR( cudaEventCreate( &start ) ); 
+//	HANDLE_ERROR( cudaEventCreate( &stop ) ); 
+//	HANDLE_ERROR( cudaEventRecord( start, 0 ) );
 
 	cudaMalloc((void **)) &a1_d, size)	
 	cudaMalloc((void **)) &a2_d, size)
@@ -59,12 +59,12 @@ int main(void) {
 	dotproduct <<< n_blocks, block_size >>> (a1_d, a2_d, a3_d)	
 	free(a1_h, a2_h, a3_h); cudaFree(a1_d, a2_d, a3_d);
 
-	HANDLE_ERROR( cudaEventRecord( stop, 0 ) );
-	HANDLE_ERROR( cudaEventSynchronize( stop ) );
-	float   elapsedTime;
-	HANDLE_ERROR( cudaEventElapsedTime( &elapsedTime, start, stop ) );
-	printf( "Time for ...:  %3.1f ms\n", elapsedTime );
+//	HANDLE_ERROR( cudaEventRecord( stop, 0 ) );
+//	HANDLE_ERROR( cudaEventSynchronize( stop ) );
+//	float   elapsedTime;
+//	HANDLE_ERROR( cudaEventElapsedTime( &elapsedTime, start, stop ) );
+//	printf( "Time for ...:  %3.1f ms\n", elapsedTime );
 	
-	HANDLE_ERROR( cudaEventDestroy( start ) );
-	HANDLE_ERROR( cudaEventDestroy( stop ) );
+//	HANDLE_ERROR( cudaEventDestroy( start ) );
+//	HANDLE_ERROR( cudaEventDestroy( stop ) );
 }
