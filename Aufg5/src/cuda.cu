@@ -1,9 +1,9 @@
 
 #include <stdio.h>
 #include <cuda.h>
-#define N = 100
 
 __global__ void dotproduct( float *a, float *b, float *c ) {
+	int N = 100;
 	const int threadsPerBlock = 100;
     __shared__ float cache[threadsPerBlock];
     int tid = threadIdx.x + blockIdx.x * blockDim.x;
@@ -48,16 +48,16 @@ int main(void) {
 //	HANDLE_ERROR( cudaEventCreate( &stop ) ); 
 //	HANDLE_ERROR( cudaEventRecord( start, 0 ) );
 
-	cudaMalloc((void **)) &a1_d, size);	
-	cudaMalloc((void **)) &a2_d, size);
-	cudaMalloc((void **)) &a3_d, size);
+	cudaMalloc((void **) &a1_d, size);
+	cudaMalloc((void **) &a2_d, size);
+	cudaMalloc((void **) &a3_d, size);
 	cudaMemcpy(a1_d, a1_h, size, cudaMemcpyHostToDevice);		
 	cudaMemcpy(a2_d, a2_h, size, cudaMemcpyHostToDevice);		
 	cudaMemcpy(a3_d, a3_h, size, cudaMemcpyHostToDevice);		
 	
 	int block_size = 4;
 	int n_blocks = N/block_size + (N%block_size == 0 ? 0:1);
-	dotproduct <<< n_blocks, block_size >>> (a1_d, a2_d, a3_d);
+	dotproduct << n_blocks, block_size >> (a1_d, a2_d, a3_d);
 	free(a1_h, a2_h, a3_h); cudaFree(a1_d, a2_d, a3_d);
 
 //	HANDLE_ERROR( cudaEventRecord( stop, 0 ) );
