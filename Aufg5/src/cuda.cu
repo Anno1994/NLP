@@ -57,8 +57,14 @@ int main(void) {
 	
 	int block_size = 4;
 	int n_blocks = N/block_size + (N%block_size == 0 ? 0:1);
-	dotproduct << n_blocks, block_size >> (a1_d, a2_d, a3_d);
-	free(a1_h, a2_h, a3_h); cudaFree(a1_d, a2_d, a3_d);
+	dotproduct <<< n_blocks, block_size >>> (a1_d, a2_d, a3_d);
+
+	free(a1_h);
+	free(a2_h);
+	free(a3_h);
+	cudaFree(a1_d);
+	cudaFree(a2_d);
+	cudaFree(a2_d);
 
 //	HANDLE_ERROR( cudaEventRecord( stop, 0 ) );
 //	HANDLE_ERROR( cudaEventSynchronize( stop ) );
